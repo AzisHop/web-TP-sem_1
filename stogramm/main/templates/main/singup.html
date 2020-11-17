@@ -1,0 +1,106 @@
+{% extends 'main/base.html' %}
+
+
+{% block content %}
+    <div class="container ">
+        <div class="row mb-3">
+            <!-- For  Questions -->
+            <div class="col-8 mt-3 mr-3">
+
+                <h2 align="center">Welcome to Numbers World!</h2>
+
+
+                <form>
+                    <div class="form-row">
+                        <label for="validationServer01">Login</label>
+                        <input type="text" class="form-control is-valid" id="validationServer01"
+                               placeholder="Star Login" value="login" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="validationServer02">Email</label>
+                        <input type="text" class="form-control is-valid" id="validationServer02"
+                               placeholder="Star Email" value="example@mail.ru" required>
+                        <div class="valid-feedback">
+                            Continue!
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="validationServer03">Nickname</label>
+                        <input type="text" class="form-control is-valid" id="validationServer03" placeholder="Star nick"
+                               value="nickname" required>
+                        <div class="valid-feedback">
+                            Great nickname!
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control is-valid" id="exampleInputPassword1"
+                               placeholder="Password">
+                        <div class="valid-feedback">
+                            Good password!
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="exampleInputPassword2">Re-enter password</label>
+                        <input type="password" class="form-control is-valid" id="exampleInputPassword2"
+                               placeholder="Re-enter password">
+                        <div class="valid-feedback">
+                            Match!
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="exampleFormControlFile1">Choose avatar</label>
+                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                    </div>
+
+
+                    <div class="form-group mt-5">
+                        <div class="form-check">
+                            <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3"
+                                   required>
+                            <label class="form-check-label" for="invalidCheck3">
+                                Press me!
+                            </label>
+                            <div class="invalid-feedback">
+                                You must fill all fields.
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-success" type="submit">Register</button>
+                </form>
+
+
+            </div>
+            <!-- For  Tags -->
+            <div class="col-3">
+
+                <div class="row tags">
+                    <p class="mr-3 w-100 h2 ">Popular tags</p>
+                    <a class="mr-3 h4 topbar-font" href="#">Numbers</a>
+                    <a class="mr-3 h4 topbar-font" href="#">Algebra</a>
+                    <a class="mr-3 h4 topbar-font" href="#">Prime</a>
+                    <a class="mr-3 h4 topbar-font" href="#">Probability</a>
+                </div>
+
+                <div class="row tags">
+                    <p class="mr-3  h2 ">Best Members</p>
+                    <a class="mr-3 h4 w-100 topbar-font" href="#">Riemann</a>
+                    <a class="mr-3 h4 w-100 topbar-font" href="#">Fermat</a>
+                    <a class="mr-3 h4 w-100 topbar-font" href="#">Euler</a>
+                    <a class="mr-3 h4 w-100 topbar-font" href="#">Lagrange</a>
+                    <a class="mr-3 h4 w-100 topbar-font" href="#">Gauss</a>
+
+                </div>
+
+            </div>
+
+        </div>
+{% endblock %}

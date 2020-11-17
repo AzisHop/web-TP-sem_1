@@ -1,0 +1,35 @@
+{% load static %}
+
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-secondary" style="margin-top: -11px;">
+{#        <a class="navbar-brand" href="{% url 'index' %}">AskME</a>#}
+
+        <a href="{% url 'index' %}"><img src="{% static 'main/images/logo3.png' %}" id="logo"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="text" placeholder="Искать" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="margin-right: 10px">Поиск
+                </button>
+            </form>
+            <ul class="navbar-nav mr-auto ">
+                <li class="nav-item-active">
+                    <a class="nav-link text-success" href="{% url 'ask' %}">Спросить</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mt-2 mt-md-0">
+                <li class="nav-item-img">
+                    <img src="{% static 'main/images/avatar.png' %}" id="avatar" style="margin-right: 10px;">
+                </li>
+                <li class="nav-item">
+                    <div class="text-nav topbar-font">Kachok</div>
+                    <a class="nav-link-q topbar-font" href="{% url 'settings' %}">настройки</a>
+                    <a class="nav-link-q topbar-font" href="{% url 'singup' %}">log out</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>

@@ -1,0 +1,47 @@
+{% extends 'main/base.html' %}
+{% load static %}
+    <link href="{% static 'main/css/bootstrap.min.css' %}" rel="stylesheet">
+
+{#{% block title %}#}
+{##}
+{#<div class="question-box-title">#}
+{#    <div class="question-text-title">New Questions</div>#}
+{#    <a class="question-link" href="#">Hot Questions<span#}
+{#            class="sr-only">(current)</span></a>#}
+{#</div>#}
+{##}
+{#{% endblock title %}#}
+
+{% block content %}
+
+<!--         Questions           -->
+
+{#{% for question in page_obj %}#}
+{#    {% include 'main/inc/question.html' %}#}
+{#{% endfor %}#}
+    <div class="container ">
+        <div class="row">
+            <!-- For  Questions -->
+            <div class="col-8 mt-3">
+{% for question in page_obj %}
+    {% include 'main/inc/question.html' %}
+{% endfor %}
+
+                <div class="row mr-3 mt-3">
+
+
+
+                </div>
+            </div>
+            <!-- For  Tags -->
+            {% include 'main/inc/tags.html' %}
+        </div>
+
+
+    </div>
+        {% include 'main/inc/paginator.html' %}
+
+
+{#{% include 'main/inc/buttons.html' %}#}
+
+{% endblock content %}

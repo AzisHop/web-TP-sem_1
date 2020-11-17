@@ -1,10 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'main/base.html' %}
+{% load static %}
 
-</body>
-</html>
+{% block content %}
+    <div class="container ">
+    <div class="row">
+      <!-- For  Questions -->
+      <div class="col-8 mt-3 mb-3">
+        <h2 align="center" class="topbar-font">Добро пожаловать в мир спорта!</h2>
+        <form>
+          <div class="row mt-5">
+            <div class="col-1 h5">
+              <label for="formTitle" class="topbar-font">Тема</label>
+            </div>
+            <div class="col-8">
+              <input type="text" class="form-control " id="formTitle" placeholder="Ваш заголовок">
+            </div>
+          </div>
+
+          <div class="row mt-5">
+            <div class="col-1 h5">
+              <label for="formText" class="topbar-font">Текст</label>
+            </div>
+            <div class="col-8">
+              <textarea class="form-control" id="formText" placeholder="Задайте вопрос" rows="8"></textarea>
+            </div>
+          </div>
+
+          <div class="row mt-5">
+            <div class="col-1 h5">
+              <label for="formTags" class="topbar-font">Тэг</label>
+            </div>
+            <div class="col-8">
+              <input type="text" class="form-control" id="formTags" placeholder="Тэг">
+            </div>
+          </div>
+          <button type="submit" class="mx-auto btn btn-success">Ask!</button>
+        </form>
+      </div>
+      <!-- For  Tags -->
+        {% include 'main/inc/tags.html' %}
+    </div>
+  </div>
+{% endblock %}

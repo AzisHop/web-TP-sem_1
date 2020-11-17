@@ -1,16 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="../../static/main/css/style.css">
-</head>
-<body>
-    <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
-        <div class="container-fluid">
-            <a hraf="#" class="navbar-brad"><img src="logo.png"></a>
+{% extends 'main/base.html' %}
+{% load static %}
+
+
+{% block content %}
+    {#{% include 'main/inc/question.html' %}#}
+
+    <!--        Answers            -->
+
+    {#{% include 'main/inc/answer.html' %}#}
+
+
+    <div class="container ">
+        <div class="row">
+            <!-- For  Questions -->
+            <div class="col-8 mt-3">
+                {% include 'main/inc/question.html' %}
+                {% for answer in page_obj %}
+                    {% include 'main/inc/answer.html' %}
+                {% endfor %}
+
+                <div class="row mr-3 mt-3">
+
+                    <textarea class="form-control" rows="5" placeholder="Your answer!"></textarea>
+                    <button class="btn btn-primary mt-2" type="submit">Answer!</button>
+
+                </div>
+            </div>
+            <!-- For  Tags -->
+            {% include 'main/inc/tags.html' %}
+            {% include 'main/inc/paginator.html' %}
         </div>
-    </nav>
-</body>
-</html>
+
+
+    </div>
+
+
+{% endblock content %}
+
+

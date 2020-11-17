@@ -1,0 +1,51 @@
+{% load static %}
+
+<div class="row answer mt-3 mr-3" style=" border-radius: 20px; padding-bottom: 10px; background-color: rgba(210, 226, 226, 0.79);">
+          <div class="container">
+            <div class="row mt-2">
+              <div class="col-2">
+
+
+                <div class="row">
+                  <img class="avatar mx-auto my-auto" src="{% static 'main/images/avatar.png' %}" alt="">
+                </div>
+                <!-- WARNING: тут должны быть лайки -->
+                <div class="row mt-3">
+                  <div class="btn-group mx-auto my-auto">
+                    <button type="button" class="btn btn-secondary">+</button>
+                    <button type="button" class="btn btn-secondary">-</button>
+                  </div>
+                    <div style="margin-left: 20px">name</div>
+                </div>
+
+              </div>
+
+              <div class="col">
+                <div class="row">
+                  <a href="#" class="h5">Answer</a>
+                </div>
+
+                <div class="row">
+                  <div class="">{{ answer.text }}</div>
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <form>
+                      <div class="form-check text-right">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                        <label class="form-check-label " for="defaultCheck1">
+                          This is correct!
+                        </label>
+                      </div>
+                    </form>
+                  </div>
+
+                </div>
+              </div>
+
+
+            </div>
+
+          </div>
+        </div>

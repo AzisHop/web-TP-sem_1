@@ -1,0 +1,48 @@
+{% load static %}
+<div class="container">
+<div class="row question mt-3 mr-3 ques-st" style="position: relative; left: -40px">
+          <div class="container" id="qtn">
+            <div class="row mt-2">
+              <div class="col-2">
+
+                <div class="row">
+                  <img class="avatar mx-auto my-auto" src="{% static 'main/images/avatar.png' %}" alt="">
+                </div>
+                <!-- WARNING: тут должны быть лайки -->
+                <div class="row mt-3">
+                  <div class="btn-group mx-auto my-auto">
+                    <button type="button" class="btn btn-secondary">+</button>
+                    <button type="button" class="btn btn-secondary">-</button>
+                  </div>
+                    <div style="margin-left: 20px">name</div>
+                </div>
+
+              </div>
+
+              <div class="col">
+                <div class="row">
+                  <a href="{% url 'question' question_id=question.id %}" class="h5">{{ question.title }}</a>
+                </div>
+
+                <div class="row">
+                     <div class="question-text">{{ question.text }}</div>
+                </div>
+
+                <div class="row">
+                  <div class="col text-center">
+                    <a href="#">Answers(3)</a>
+                  </div>
+                  <div class="col">
+                    <span>Tags:</span>
+                    <a href="#">Prime</a>
+                    <a href="#">Numbers</a>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+
+          </div>
+        </div>
+    </div>

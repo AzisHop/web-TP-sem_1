@@ -1,0 +1,54 @@
+{% load static %}
+<nav aria-label="pagination">
+    <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page=1" tabindex="-1">first</a>
+            </li>
+        {% endif %}
+
+        {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">previous</a>
+            </li>
+        {% endif %}
+        {##}
+        {#        <li class="page-item disabled">#}
+        {#            <a class="page-link" href="#" tabindex="-1">Previous</a>#}
+        {#        </li>#}
+
+        {#        <li class="page-item"><a class="page-link" href="#">1</a></li>#}
+        {#        <li class="page-item active">#}
+        {#            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>#}
+        {#        </li>#}
+        {##}
+        {#        <li class="page-item"><a class="page-link" href="#">3</a></li>#}
+
+        {% for n in page_obj.paginator.page_range %}
+
+            {% if page_obj.number == n %}
+                <li class="page-item active">
+                    <a class="page-link" href="?page={{ n }}">{{ n }} <span class="sr-only">(current)</span></a>
+                </li>
+            {% elif n > page_obj.number|add:-3 and n < page_obj.number|add:3 %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ n }}">{{ n }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}" tabindex="-1">next</a>
+            </li>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">last</a>
+            </li>
+        {% endif %}
+
+
+    </ul>
+</nav>
