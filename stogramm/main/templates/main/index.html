@@ -2,23 +2,25 @@
 {% load static %}
     <link href="{% static 'main/css/bootstrap.min.css' %}" rel="stylesheet">
 
-{#{% block title %}#}
-{##}
-{#<div class="question-box-title">#}
-{#    <div class="question-text-title">New Questions</div>#}
-{#    <a class="question-link" href="#">Hot Questions<span#}
-{#            class="sr-only">(current)</span></a>#}
-{#</div>#}
-{##}
-{#{% endblock title %}#}
+
+
+{% block title %}
+
+    <div style="margin-left: 300px;">
+        <div class="text-success text-justify-bottom"></div>
+        <a class="question-link" href="{% url 'hot' %}">Hot Questions<span
+                class="sr-only">(current)</span></a>
+    </div>
+
+{% endblock title %}
+
+
 
 {% block content %}
 
 <!--         Questions           -->
 
-{#{% for question in page_obj %}#}
-{#    {% include 'main/inc/question.html' %}#}
-{#{% endfor %}#}
+
     <div class="container ">
         <div class="row">
             <!-- For  Questions -->
