@@ -8,9 +8,12 @@
 
     <div style="margin-left: 300px;">
         <div class="text-success text-justify-bottom"></div>
+        <div class="text-success text-justify-bottom">New Questions</div>
         <a class="question-link" href="{% url 'hot' %}">Hot Questions<span
                 class="sr-only">(current)</span></a>
     </div>
+
+
 
 {% endblock title %}
 
@@ -25,7 +28,7 @@
         <div class="row">
             <!-- For  Questions -->
             <div class="col-8 mt-3">
-{% for question in page_obj %}
+{% for question in objects_of_page %}
     {% include 'main/inc/question.html' %}
 {% endfor %}
 

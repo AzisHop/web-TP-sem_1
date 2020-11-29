@@ -1,12 +1,24 @@
 from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User
+from django.conf import settings
 
 
-# Model Managers
+#
+#
+# # Model Managers
+#
+# class ProfileManager(models.Manager):
+#     def user_top(self):
+#         return self.order_by('-rating')[:8]
+
 
 class Profile(User):
-    avatar = models.FilePathField()
+    avatar = models.CharField(max_length=64, verbose_name="Путь к изображению", blank=True)
+    # user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    # rating = models.IntegerField(default=0)
+
+    # objects = ProfileManager()
 
     def __str__(self):
         return self.username
@@ -16,77 +28,108 @@ class Profile(User):
         verbose_name_plural = 'Users'
 
 
+class AnswerManager(models.Manager):
+    def answers_by_questions(self, id):
+        return self.filter(question__id=id)
+
+
+class Answer(models.Model):
+    objects = AnswerManager()
+    question = models.ForeignKey("Question", on_delete=models.CASCADE)
+    profile = models.ForeignKey("Profile", on_delete=models.CASCADE, related_name="Prof", default=0)
+    text = models.TextField(verbose_name='Content')
+    likes = models.ManyToManyField("Profile", through="AnswerLike",
+                                   through_fields=("answer", "profile"),
+                                   related_name="answer_liked")
+    rating = models.IntegerField(verbose_name="Rating", default=0)
+    creation_date = models.DateTimeField(auto_now_add=True, verbose_name='creation_date')
+
+    def __str__(self):
+        return self.text
+
+    class Meta:
+        verbose_name = "Answer"
+        verbose_name_plural = "Answers"
+
+
 class QuestionManager(models.Manager):
     def new_questions(self):
-        return self.all().order_by('-creation_datetime')
+        return self.all().order_by('-date')
 
     def hot_questions(self):
         return self.all().order_by('-rating')
 
-
-# TODO sort_by_tag
+    def by_tag(self, tag):
+        return self.filter(tags__text__exact=tag)
 
 
 class Tag(models.Model):
-    name = models.CharField(max_length=255)
+    text = models.CharField(max_length=40, unique=True, verbose_name="tag_name")
 
     def __str__(self):
-        return self.name
+        return self.text
 
     class Meta:
-        verbose_name = 'Тег'
-        verbose_name_plural = 'Теги'
+        verbose_name = "Тег"
+        verbose_name_plural = "Теги"
 
 
 class Question(models.Model):
-    title = models.CharField(max_length=255, null=False, verbose_name='title')
-    content = models.TextField(verbose_name='content')
-    creation_date = models.DateTimeField(auto_now_add=True, verbose_name='creation_date')
-    rating = models.IntegerField(default=0, verbose_name='rating')
-
-    author = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    tags = models.ManyToManyField(Tag)
-
     objects = QuestionManager()
+
+    title = models.CharField(max_length=255, null=False, verbose_name='title')
+    text = models.TextField(verbose_name='content')
+    profile_asked = models.ForeignKey("Profile", on_delete=models.CASCADE,
+                                      related_name="question_asked",
+                                      default=0)
+
+    likes = models.ManyToManyField("Profile", through="QuestionLike",
+                                   through_fields=("question", "profile"),
+                                   related_name="question_liked")
+
+    rating = models.IntegerField(default=0, verbose_name='rating')
+    tags = models.ManyToManyField("Tag", related_name="questions")
+    date = models.DateField(auto_now_add=True, verbose_name='creation_date')
 
     def __str__(self):
         return self.title
 
     class Meta:
-        verbose_name = 'вопрос'
-        verbose_name_plural = 'вопросы'
+        verbose_name = "Question"
+        verbose_name_plural = "Questions"
 
 
-class Answer(models.Model):
-    content = models.TextField(verbose_name='content')
-    creation_date = models.DateTimeField(auto_now_add=True, verbose_name='creation_date')
-    correct = models.BooleanField(default=False)
-    rating = models.IntegerField(default=0)
+class QuestionLike(models.Model):
+    LIKE = "+"
+    DISLIKE = "-"
+    RATINGS = [(LIKE, "Like"), (DISLIKE, "Dislike")]
 
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    author = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    profile = models.ForeignKey("Profile", on_delete=models.CASCADE, default=0)
+    question = models.ForeignKey("Question", on_delete=models.CASCADE)
+    rating = models.CharField(max_length=1, choices=RATINGS, default=LIKE)
 
     def __str__(self):
-        return self.content
+        return self.question.text
 
     class Meta:
-        verbose_name = 'ответ'
-        verbose_name_plural = 'ответы'
+        verbose_name = "Rating question"
+        verbose_name_plural = "Rating questions"
+        unique_together = (("profile", "question"),)
 
 
-class Question_Like(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    value = models.IntegerField(default=0)
+class AnswerLike(models.Model):
+    LIKE = "+"
+    DISLIKE = "-"
+    RATINGS = [(LIKE, "Like"), (DISLIKE, "Dislike")]
+
+    profile = models.ForeignKey("Profile", on_delete=models.CASCADE, default=0)
+    answer = models.ForeignKey("Answer", on_delete=models.CASCADE)
+    rating = models.CharField(max_length=1, choices=RATINGS, default=LIKE)
+
+    def __str__(self):
+        return self.answer.text
 
     class Meta:
-        unique_together = (("question", "user"),)
-
-
-class Answer_Like(models.Model):
-    answer = models.ForeignKey(Answer, on_delete=models.CASCADE)
-    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    value = models.IntegerField(default=0)
-
-    class Meta:
-        unique_together = (("answer", "user"),)
+        verbose_name = "Рейтинг ответа"
+        verbose_name_plural = "Рейтинг ответов"
+        unique_together = (("profile", "answer"),)

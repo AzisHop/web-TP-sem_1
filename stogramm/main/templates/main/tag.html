@@ -1,0 +1,24 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}
+
+<div class="question-box-title">
+    <div class="question-text-title topbar-font">Tag: {{ tag }}</div>
+</div>
+
+{% endblock title %}
+
+{% block content %}
+
+<!--         Questions           -->
+
+{% for question in objects_of_page %}
+    {% include 'main/inc/question.html' %}
+{% endfor %}
+
+<!--        Buttons            -->
+
+{% include 'main/inc/paginator.html' %}
+
+{% endblock content %}

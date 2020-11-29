@@ -10,7 +10,7 @@
                     </div>
                     <!-- WARNING: тут должны быть лайки -->
                     <div class="row mt-3">
-                        <div class="btn-group mx-auto my-auto">
+                        <div class="btn-group mx-auto my-auto" style="position: relative; left: 30px;">
                             <button class="btnQQ">⇧</button>
                             <div class="likesQQ">{{ question.rating }}</div>
                             <button class="btnQQ">⇩</button>
@@ -35,8 +35,9 @@
                         </div>
                         <div class="col">
                             <span>Tags:</span>
-                            <a href="#">Prime</a>
-                            <a href="#">Numbers</a>
+                            {% for tag in question.tags.all %}
+                                <a href="{% url 'tag' tag=tag %}">{{ tag }}</a>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>

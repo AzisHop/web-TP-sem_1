@@ -1,15 +1,15 @@
 {% load static %}
 <nav aria-label="pagination">
     <ul class="pagination justify-content-center">
-        {% if page_obj.has_previous %}
+        {% if objects_of_page.has_previous %}
             <li class="page-item">
                 <a class="page-link" href="?page=1" tabindex="-1">first</a>
             </li>
         {% endif %}
 
-        {% if page_obj.has_previous %}
+        {% if objects_of_page.has_previous %}
             <li class="page-item">
-                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">previous</a>
+                <a class="page-link" href="?page={{ objects_of_page.previous_page_number }}">previous</a>
             </li>
         {% endif %}
         {##}
@@ -24,28 +24,28 @@
         {##}
         {#        <li class="page-item"><a class="page-link" href="#">3</a></li>#}
 
-        {% for n in page_obj.paginator.page_range %}
+        {% for n in objects_of_page.paginator.page_range %}
 
-            {% if page_obj.number == n %}
+            {% if objects_of_page.number == n %}
                 <li class="page-item active">
                     <a class="page-link" href="?page={{ n }}">{{ n }} <span class="sr-only">(current)</span></a>
                 </li>
-            {% elif n > page_obj.number|add:-3 and n < page_obj.number|add:3 %}
+            {% elif n > objects_of_page.number|add:-3 and n < objects_of_page.number|add:3 %}
                 <li class="page-item">
                     <a class="page-link" href="?page={{ n }}">{{ n }}</a>
                 </li>
             {% endif %}
         {% endfor %}
 
-        {% if page_obj.has_next %}
+        {% if objects_of_page.has_next %}
             <li class="page-item">
-                <a class="page-link" href="?page={{ page_obj.next_page_number }}" tabindex="-1">next</a>
+                <a class="page-link" href="?page={{ objects_of_page.next_page_number }}" tabindex="-1">next</a>
             </li>
         {% endif %}
 
-        {% if page_obj.has_next %}
+        {% if objects_of_page.has_next %}
             <li class="page-item">
-                <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">last</a>
+                <a class="page-link" href="?page={{ objects_of_page.paginator.num_pages }}">last</a>
             </li>
         {% endif %}
 
